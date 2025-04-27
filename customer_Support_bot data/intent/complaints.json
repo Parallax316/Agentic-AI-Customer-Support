@@ -1,0 +1,54 @@
+{
+"Complaints": [
+    {
+      "query": "I received a damaged product.",
+      "intent": "complaint",
+      "response": "We’re sorry for the inconvenience. Please provide your order number and photos of the damaged item so we can assist you promptly."
+    },
+    {
+      "query": "My order arrived later than expected.",
+      "intent": "complaint",
+      "response": "We apologize for the delay. Could you please share your order details so we can investigate the issue with our shipping department?"
+    },
+    {
+      "query": "The product I received is not what I ordered.",
+      "intent": "complaint",
+      "response": "We regret the mix-up with your order. Please send us your order number and a description of the issue, and we'll work on resolving it immediately."
+    },
+    {
+      "query": "I was charged twice for my purchase.",
+      "intent": "complaint",
+      "response": "We apologize for the billing error. Please provide your transaction details so we can look into the duplicate charge and issue a refund if necessary."
+    },
+    {
+      "query": "The customer support response time has been unsatisfactory.",
+      "intent": "complaint",
+      "response": "We’re sorry that you experienced delays. Your feedback is important to us, and we will escalate this issue to improve our support service."
+    },
+    {
+      "query": "I never received a confirmation email for my order.",
+      "intent": "complaint",
+      "response": "I apologize for the oversight. Let me verify your order details and ensure that the confirmation email is resent to you immediately."
+    },
+    {
+      "query": "I received a product with missing parts.",
+      "intent": "complaint",
+      "response": "I'm sorry about the missing parts. Please provide your order information and details of the missing items so we can resolve the issue as soon as possible."
+    },
+    {
+      "query": "The refund process is taking too long.",
+      "intent": "complaint",
+      "response": "We apologize for the delay in processing your refund. I will check on the status of your refund immediately and update you shortly."
+    },
+    {
+      "query": "My account was charged for a subscription I didn't authorize.",
+      "intent": "complaint",
+      "response": "I'm sorry for any confusion. Please share your account details so we can review the subscription charge and correct any errors."
+    },
+    {
+      "query": "The product manual is incomplete and confusing.",
+      "intent": "complaint",
+      "response": "We apologize for any inconvenience caused by the manual. I'll forward your feedback to our documentation team, and we will work on a revised version."
+    }
+  ]
+}

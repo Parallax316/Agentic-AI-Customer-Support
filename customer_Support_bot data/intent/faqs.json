@@ -1,0 +1,54 @@
+{
+    "FAQs": [
+      {
+        "query": "What is your return policy?",
+        "intent": "faq",
+        "response": "You can return items within 30 days of purchase provided they are in their original condition."
+      },
+      {
+        "query": "How do I update my billing information?",
+        "intent": "faq",
+        "response": "You can update your billing details from your account settings under the 'Billing' section. If you encounter any issues, please contact support."
+      },
+      {
+        "query": "Where can I view my order history?",
+        "intent": "faq",
+        "response": "Your order history is available in your account dashboard under the 'Orders' tab."
+      },
+      {
+        "query": "Do you offer any warranty on your products?",
+        "intent": "faq",
+        "response": "Yes, all our products come with a one-year warranty. Extended warranty options are also available for select items."
+      },
+      {
+        "query": "How can I contact customer support?",
+        "intent": "faq",
+        "response": "You can contact our customer support via email, phone, or live chat on our website."
+      },
+      {
+        "query": "Where can I find troubleshooting guides?",
+        "intent": "faq",
+        "response": "Troubleshooting guides are available in the 'Help' section on our website. Simply search by product or issue to find the relevant guide."
+      },
+      {
+        "query": "What are your shipping options?",
+        "intent": "faq",
+        "response": "We offer standard, expedited, and overnight shipping options. Shipping charges vary based on your location and chosen shipping speed."
+      },
+      {
+        "query": "Can I cancel my order?",
+        "intent": "faq",
+        "response": "Orders can be canceled within one hour of placement. After that, cancellation may not be possible, but please contact our support team for assistance."
+      },
+      {
+        "query": "How do I track my shipment?",
+        "intent": "faq",
+        "response": "Once your order is shipped, you will receive a tracking number via email. Use that number on the carrier's website to track your shipment."
+      },
+      {
+        "query": "Do you have a loyalty program?",
+        "intent": "faq",
+        "response": "Yes, we offer a loyalty program that rewards frequent customers with discounts and exclusive offers. Sign up through your account dashboard."
+      }
+    ]
+}

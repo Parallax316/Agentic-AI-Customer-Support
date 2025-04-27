@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Customer Support</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .input-area {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 0 0 8px 8px;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .input-area button {
+            padding: 12px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .input-area button:hover {
+            background-color: #3a7fcb;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #e6f2ff;
+            color: #333;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-message {
+            background-color: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+        .message-header {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .user-header {
+            text-align: right;
+        }
+        .bot-header {
+            text-align: left;
+        }
+        .details-container {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .details-heading {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .loading-dots {
+            display: flex;
+        }
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #4a90e2;
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Customer Support</h1>
+        </div>
+        <div class="chat-container">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message-container">
+                    <div class="message-header bot-header">Support Bot</div>
+                    <div class="message bot-message">Hello! How can I assist you today?</div>
+                </div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Type your query here..." />
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <div class="details-container hidden" id="details-container">
+            <div class="details-heading">Query Details:</div>
+            <div id="details-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const detailsContainer = document.getElementById('details-container');
+        const detailsContent = document.getElementById('details-content');
+
+        // Function to add a message to the chat
+        function addMessage(text, isUser = false) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+
+            const messageHeader = document.createElement('div');
+            messageHeader.className = isUser ? 'message-header user-header' : 'message-header bot-header';
+            messageHeader.textContent = isUser ? 'You' : 'Support Bot';
+
+            const message = document.createElement('div');
+            message.className = isUser ? 'message user-message' : 'message bot-message';
+            message.textContent = text;
+
+            messageContainer.appendChild(messageHeader);
+            messageContainer.appendChild(message);
+            chatMessages.appendChild(messageContainer);
+
+            // Scroll to the bottom of the chat
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to show loading indicator
+        function showLoading() {
+            const loadingContainer = document.createElement('div');
+            loadingContainer.className = 'loading';
+            loadingContainer.id = 'loading-indicator';
+
+            const loadingDots = document.createElement('div');
+            loadingDots.className = 'loading-dots';
+
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('span');
+                loadingDots.appendChild(dot);
+            }
+
+            loadingContainer.appendChild(loadingDots);
+            chatMessages.appendChild(loadingContainer);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to hide loading indicator
+        function hideLoading() {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.remove();
+            }
+        }
+
+        // Function to display query details
+        function displayDetails(data) {
+            detailsContainer.classList.remove('hidden');
+            
+            const intent = data.intent.raw || data.intent;
+            const sentiment = data.sentiment;
+            
+            detailsContent.innerHTML = `
+                <p><strong>Intent:</strong> ${intent}</p>
+                <p><strong>Sentiment Analysis:</strong></p>
+                <ul>
+                    <li><strong>Emotion:</strong> ${sentiment.emotion || 'N/A'}</li>
+                    <li><strong>Urgency Level:</strong> ${sentiment.urgency || 'N/A'}</li>
+                    <li><strong>Satisfaction Score:</strong> ${sentiment.satisfaction || 'N/A'}</li>
+                </ul>
+            `;
+        }
+
+        // Function to send message
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (text === '') return;
+
+            // Add user message to chat
+            addMessage(text, true);
+            userInput.value = '';
+            
+            // Show loading indicator
+            showLoading();
+
+            try {
+                const response = await fetch('/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Hide loading indicator
+                hideLoading();
+
+                // Add bot response to chat
+                addMessage(data.response);
+
+                // Display query details
+                displayDetails(data);
+            } catch (error) {
+                // Hide loading indicator
+                hideLoading();
+                
+                // Show error message
+                addMessage('I apologize, but I encountered an error while processing your request. Please try again later.');
+                console.error('Error:', error);
+            }
+        }
+
+        // Add event listeners
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Check API health on page load
+        async function checkHealth() {
+            try {
+                const response = await fetch('/health');
+                if (!response.ok) {
+                    throw new Error('API is not healthy');
+                }
+            } catch (error) {
+                console.error('API health check failed:', error);
+                addMessage('Warning: The service might be experiencing issues. Please try again later.');
+            }
+        }
+
+        // Call health check when page loads
+        checkHealth();
+    </script>
+</body>
+</html>

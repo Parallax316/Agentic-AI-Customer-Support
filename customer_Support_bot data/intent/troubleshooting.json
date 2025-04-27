@@ -1,0 +1,55 @@
+
+{
+"Troubleshooting": [
+    {
+      "query": "I can’t reset my password.",
+      "intent": "troubleshooting",
+      "response": "Go to 'Forgot Password' and check your email for the reset link. If you don't see it, please check your spam folder."
+    },
+    {
+      "query": "My device is not connecting to the Wi-Fi network.",
+      "intent": "troubleshooting",
+      "response": "Please ensure your Wi-Fi is enabled and try restarting your router. If the issue persists, verify that other devices can connect to your network."
+    },
+    {
+      "query": "The application crashes immediately upon launching.",
+      "intent": "troubleshooting",
+      "response": "Try reinstalling the application and ensuring that your device meets the minimum system requirements. Let us know if the problem continues."
+    },
+    {
+      "query": "I’m experiencing slow performance after the latest update.",
+      "intent": "troubleshooting",
+      "response": "Please clear your cache and temporary files, then restart your device. If you still notice slow performance, contact our support team."
+    },
+    {
+      "query": "My screen freezes when I try to open certain files.",
+      "intent": "troubleshooting",
+      "response": "This may be due to file corruption. Try opening the file on another device or reinstalling the relevant software. If the issue persists, we can investigate further."
+    },
+    {
+      "query": "The printer is not responding to print commands.",
+      "intent": "troubleshooting",
+      "response": "Ensure that your printer is powered on, connected to the same network, and has sufficient ink and paper. Try restarting the printer and your device."
+    },
+    {
+      "query": "I am not receiving email notifications.",
+      "intent": "troubleshooting",
+      "response": "Check your spam or junk folder and ensure that notifications are enabled in your account settings. Also, verify that your email address is entered correctly."
+    },
+    {
+      "query": "The website is loading very slowly.",
+      "intent": "troubleshooting",
+      "response": "Please check your internet connection and try clearing your browser cache. If the problem continues, it might be an issue on our end."
+    },
+    {
+      "query": "I’m unable to access the company VPN.",
+      "intent": "troubleshooting",
+      "response": "Ensure that you are using the correct login credentials and that your internet connection is stable. Restart the VPN client and try again."
+    },
+    {
+      "query": "My software license key is not being accepted during installation.",
+      "intent": "troubleshooting",
+      "response": "Double-check that you have entered the license key correctly, ensuring there are no extra spaces or characters. If the issue persists, please contact our licensing team."
+    }
+  ]
+}
