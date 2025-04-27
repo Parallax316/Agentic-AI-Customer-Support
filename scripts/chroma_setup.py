@@ -1,8 +1,9 @@
 import chromadb
 import os
 
-# Configure paths
-DB_PATH = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'chroma_db')
+# Configure paths relative to the project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Get project root (one level up from scripts)
+DB_PATH = os.path.join(PROJECT_ROOT, 'chroma_db') # Changed from absolute path
 
 # Create persistent client
 client = chromadb.PersistentClient(path=DB_PATH)

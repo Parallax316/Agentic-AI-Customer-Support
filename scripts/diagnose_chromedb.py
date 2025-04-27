@@ -7,7 +7,9 @@ from sentence_transformers import SentenceTransformer
 load_dotenv()
 
 # Configuration
-DB_PATH = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'chroma_db')
+# Use relative path for portability
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(PROJECT_ROOT, 'chroma_db') # Changed from absolute path
 
 # Initialize ChromaDB client
 client = chromadb.PersistentClient(path=DB_PATH)

@@ -1,15 +1,14 @@
 # ✨ AI-Powered Customer Support System ✨
 
-<!-- Optional: Add a project logo or banner image here -->
-<!-- ![Project Banner](link_to_your_banner.png) -->
 
 **Transform your customer service with an intelligent system that understands and responds with empathy.**
 
 A sophisticated customer support system that leverages artificial intelligence to provide intelligent, 
 context-aware responses to customer queries. The system combines RAG (Retrieval-Augmented Generation), 
 sentiment analysis, and intent classification to deliver personalized and empathetic customer support.
-<!-- Optional: Add a GIF or screenshot of the application interface here -->
-<!-- ![Demo GIF](link_to_your_demo.gif) -->
+
+
+
 
 ## Features
 
@@ -65,13 +64,15 @@ sentiment analysis, and intent classification to deliver personalized and empath
 
 ## 🚀 Getting Started
 
+**Important:** This project relies on a local ChromaDB vector database. You need to initialize it and populate it with embeddings from the provided knowledge base data before running the main application.
+
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/Parallax316/Agentic-AI-Customer-Support.git
     cd agentic-ai-support
     ```
 
-2.  **Set up Backend:**
+2.  **Set up Backend & Environment:**
     - Create and activate virtual environment:
       ```bash
       python -m venv venv
@@ -80,52 +81,93 @@ sentiment analysis, and intent classification to deliver personalized and empath
       # Linux/Mac
       source venv/bin/activate
       ```
-    - Install backend dependencies:
+    - Install dependencies (including those for scripts):
       ```bash
       pip install -r requirements.txt
       ```
-    - Run the backend server:
+
+3.  **Set up ChromaDB Vector Database:**
+    - Initialize the database and collection:
+      ```bash
+      python scripts/chroma_setup.py
+      ```
+    - Generate embeddings from knowledge base documents:
+      *(This script reads data from `customer_Support_bot data/knowledge_base/`)*
+      ```bash
+      python scripts/generate_embeddings.py
+      ```
+
+4.  **Set up Frontend (React):**
+    *(Assuming your React code is in a `frontend` subdirectory)*
+    - Navigate to the frontend directory:
+      ```bash
+      # cd frontend  <- Uncomment and adjust if you have a frontend dir
+      ```
+    - Install frontend dependencies:
+      ```bash
+      # npm install 
+      # or yarn install
+      ```
+    - Start the React development server:
+      ```bash
+      # npm start
+      # or yarn start
+      ```
+
+5.  **Run the Backend Server:**
+    - Start the FastAPI application:
       ```bash
       uvicorn main:app --reload
       ```
       The backend will be available at `http://localhost:8000`.
 
-3.  **Set up Frontend (React):**
-    
-      
-    - Install frontend dependencies:
-      ```bash
-      npm install 
-      # or yarn install
-      ```
-    - Start the React development server:
-      ```bash
-      npm start
-      # or yarn start
-      ```
-      The frontend application will likely open automatically in your browser, often at `http://localhost:3000`.
-
-4.  **Access the application:**
+6.  **Access the application:**
     - Open your browser and navigate to the frontend URL (e.g., `http://localhost:3000`).
 
 ## 🔌 API Endpoints
 
-### `POST /query`
+### `POST /api/query`
 
 - **Purpose**: Receives customer messages for processing.
-- **Request Body**: `{ "query": "Your customer's message here" }`
+- **Request Body**: `{ "text": "Your customer's message here" }`
 - **Response Body**:
   ```json
   {
     "intent": "Detected intent (e.g., FAQ, Complaint)",
     "sentiment": {
-      "primary_emotion": "Detected emotion",
+      "emotion": "Detected emotion",
       "urgency": "Urgency level",
-      "satisfaction_score": "Score (1-10)"
+      "satisfaction": "Score (1-10)"
     },
-    "response": "AI-generated response"
+    "response": "AI-generated response",
+    "status": "success"
   }
   ```
+
+## ⚙️ Scripts Overview
+
+The `scripts/` directory contains modules and utilities supporting the application. **Note:** Several scripts interact with the local ChromaDB database (`./chroma_db/`) and the knowledge base data (`./customer_Support_bot data/knowledge_base/`). Paths are relative to the project root.
+
+-   **`rag.py`**: 
+    -   **Role**: Core Runtime Component.
+    -   **Purpose**: Defines the `RAGPipeline` class used by `main.py`. Handles retrieving documents from the local ChromaDB and generating responses using the OpenRouter API.
+-   **`chroma_setup.py`**:
+    -   **Role**: **Required One-Time Setup.**
+    -   **Purpose**: Initializes the persistent ChromaDB vector database locally and creates the `customer_support_docs` collection. **Must be run once by each user.**
+-   **`generate_embeddings.py`**:
+    -   **Role**: **Required Data Preparation.**
+    -   **Purpose**: Reads text files from `./customer_Support_bot data/knowledge_base/`, generates vector embeddings, and stores them in the local ChromaDB. **Must be run after `chroma_setup.py` and whenever knowledge base files change.**
+-   **`test_retrieval.py`**:
+    -   **Role**: Utility / Testing.
+    -   **Purpose**: Interactive tool to test document retrieval directly from the local ChromaDB.
+-   **`diagnose_chromedb.py`**:
+    -   **Role**: Utility / Testing.
+    -   **Purpose**: Interactive tool to test the end-to-end retrieval process (including query embedding) against the local ChromaDB.
+-   **`check.py`**:
+    -   **Role**: Utility / Diagnostics.
+    -   **Purpose**: Verifies the existence and content of the knowledge base text files in `./customer_Support_bot data/knowledge_base/`.
+
+**Setup Workflow:** Run `python scripts/chroma_setup.py` once, then `python scripts/generate_embeddings.py` to populate your local database.
 
 ## ✨ Features in Detail
 

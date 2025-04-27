@@ -11,7 +11,8 @@ class RAGPipeline:
         load_dotenv()
 
         # Configuration
-        self.DB_PATH = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'chroma_db')
+        # Use relative path for portability
+        self.DB_PATH = os.path.join('..', 'chroma_db') # Changed from absolute path
         self.OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
         self.OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions'
 

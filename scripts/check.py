@@ -1,7 +1,8 @@
 import os
 
-# Specify the exact path to your files
-knowledge_dir = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'customer_Support_bot data', 'knowledge_base')
+# Specify the path relative to the project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Get project root (one level up from scripts)
+knowledge_dir = os.path.join(PROJECT_ROOT, 'customer_Support_bot data', 'knowledge_base') # Changed from absolute path
 
 print(f"Checking files in: {knowledge_dir}")
 print(f"Directory exists: {os.path.exists(knowledge_dir)}")

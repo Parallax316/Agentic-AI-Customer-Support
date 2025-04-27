@@ -8,9 +8,10 @@ from sentence_transformers import SentenceTransformer
 load_dotenv()
 
 # Configuration
-# Use absolute paths to avoid confusion
-KNOWLEDGE_DIR = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'customer_Support_bot data', 'knowledge_base')
-DB_PATH = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'chroma_db')
+# Use relative paths for portability
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Get project root (one level up from scripts)
+KNOWLEDGE_DIR = os.path.join(PROJECT_ROOT, 'customer_Support_bot data', 'knowledge_base') # Changed from absolute path
+DB_PATH = os.path.join(PROJECT_ROOT, 'chroma_db') # Changed from absolute path
 
 # Initialize ChromaDB client
 client = chromadb.PersistentClient(path=DB_PATH)

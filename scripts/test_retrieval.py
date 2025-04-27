@@ -7,7 +7,8 @@ import json
 load_dotenv()
 
 # Configuration
-DB_PATH = os.path.join('c:\\Users\\simar\\Desktop\\AI_powered_customer support', 'chroma_db')
+# Use relative path for portability
+DB_PATH = os.path.join('..', 'chroma_db') # Changed from absolute path
 
 # Initialize ChromaDB client
 client = chromadb.PersistentClient(path=DB_PATH)
