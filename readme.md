@@ -1,4 +1,4 @@
-# ✨ AI-Powered Customer Support System ✨
+# ✨ Agentic-AI Customer Support System ✨
 
 
 **Transform your customer service with an intelligent system that understands and responds with empathy.**
