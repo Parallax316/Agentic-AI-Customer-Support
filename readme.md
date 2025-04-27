@@ -7,6 +7,7 @@ A sophisticated customer support system that leverages artificial intelligence t
 context-aware responses to customer queries. The system combines RAG (Retrieval-Augmented Generation), 
 sentiment analysis, and intent classification to deliver personalized and empathetic customer support.
 
+![Uploading image.png…]()
 
 
 
